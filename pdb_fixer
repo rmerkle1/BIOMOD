@@ -67,7 +67,7 @@ def DA_fixer(pdb):
            pass
 #order according to set pattern
        try:
-           ordered_list = [(21*a+0),(21*a+1),(21*a+2),(21*a+3),(21*a+4),(21*a+5),(21*a+6),(21*a+10),(21*a+11),(21*a+14),(21*a+13),(21*a+12),(21*a+17),(21*a+18),(21*a+19),(21*a+20),(21*a+15),(21*a+16)    ,(21*a+9),(21*a+7),(21*a+8)]
+           ordered_list = [(21*a+0),(21*a+1),(21*a+2),(21*a+3),(21*a+4),(21*a+5),(21*a+6),(21*a+10),(21*a+11),(21*a+14),(21*a+13),(21*a+12),(21*a+17),(21*a+18),(21*a+19),(21*a+20),(21*a+15),(21*a+16),(21*a+9),(21*a+7),(21*a+8)]
            A_list[(21*a+0):(21*a+21)] = [A_list[i] for i in ordered_list]
        except:
            pass
@@ -135,7 +135,7 @@ def DG_formatter(pdb):
            G_List[index]= G_List[index][:13] + G_residue_list[x] + G_List[index][16:]
            index+=1
            x+=1
-           if x == 21:
+           if x == 22:
        x= 0
    except:
        pass
@@ -151,7 +151,7 @@ def DA_formatter(pdb):
            A_List[index] = A_List[index][:13] +  A_residue_list[x] + A_List[index][16:]
            index+=1
            x+=1
-           if x == 20:
+           if x == 21:
                x = 0
 
    except:
@@ -170,7 +170,7 @@ def DC_formatter(pdb):
            C_List[index] = C_List[index][:13] + C_residue_list[x] + C_List[index][16:]
            index+=1
            x+=1
-           if x == 18:
+           if x == 19:
                x = 0
    except:
        pass
@@ -187,7 +187,7 @@ def DT_formatter(pdb):
            T_List[index] = T_List[index][:13] + T_residue_list[x] + T_List[index][16:]
            index+=1
            x+=1
-           if x == 19:
+           if x == 20:
                x = 0
    except:
          pass
