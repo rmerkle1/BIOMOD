@@ -1,0 +1,230 @@
+def sorter(pdb):
+# Residue Sorting- splits into 4 lists: DA, DC, DG, DT
+   pdb_read=open(pdb)
+   lines = pdb_read.readlines()
+   A_Residues=[]
+   C_Residues=[]
+   G_Residues=[]
+   T_Residues=[]
+ 
+   index = 0
+   for i in lines:
+       try:
+ 
+           if lines[index][18]=='A':
+              A_Residues.append(lines[index])
+           elif lines[index][18]=='C':
+              C_Residues.append(lines[index])
+           elif lines[index][18]=='G':
+              G_Residues.append(lines[index])
+           elif lines[index][18]=='T':
+              T_Residues.append(lines[index])
+           index+=1
+       except:
+           pass
+   return [A_Residues, C_Residues, G_Residues, T_Residues]
+ 
+ 
+
+def DG_fixer(pdb):
+   G_Residues = sorter(pdb)[2]
+   G_list = []
+   index = 0
+   a=0
+   for i in G_Residues:
+       x = 0
+       try:
+           while x <22:
+               G_list.append(G_Residues[index])
+               index+=1
+               x+=1
+       except:
+           pass
+#order according to set pattern
+       try:
+           ordered_list = [(22*a+0),(22*a+1),(22*a+2),(22*a+3),(22*a+4),(22*a+5),(22*a+6),(22*a+10),(22*a+11),(22*a+14),(22*a+13),(22*a+12),(22*a+17),(22*a+18),(22*a+19),(22*a+20),(22*a+15),(22*a+16)    ,(22*a+9),(22*a+7),(22*a+8)]
+           G_list[(22*a+0):(22*a+22)] = [G_list[i] for i in ordered_list]
+       except:
+           pass
+       a+=1
+   return [G_list, G_Residues]
+
+def DA_fixer(pdb):
+   A_Residues = sorter(pdb)[0]
+   A_list = []
+   a=0
+   index=0
+ 
+   for i in A_Residues:
+       x = 0
+#bring in first 21 lines of DA list
+       try:
+           while x <21:
+               A_list.append(A_Residues[index])
+               index+=1
+               x+=1
+       except:
+           pass
+#order according to set pattern
+       try:
+           ordered_list = [(21*a+0),(21*a+1),(21*a+2),(21*a+3),(21*a+4),(21*a+5),(21*a+6),(21*a+10),(21*a+11),(21*a+14),(21*a+13),(21*a+12),(21*a+17),(21*a+18),(21*a+19),(21*a+20),(21*a+15),(21*a+16)    ,(21*a+9),(21*a+7),(21*a+8)]
+           A_list[(21*a+0):(21*a+21)] = [A_list[i] for i in ordered_list]
+       except:
+           pass
+#remove 21 entries from A_Residues list    
+       a+=1
+   print(A_list)
+   return [A_list, A_Residues]
+
+
+def DC_fixer(pdb):
+   C_Residues = sorter(pdb)[1]
+   C_list = []
+   index = 0
+   a=0
+   for i in C_Residues:
+       x = 0
+       try:
+           while x <19:
+               C_list.append(C_Residues[index])
+               index+=1
+               x+=1
+       except:
+           pass
+#order according to set pattern
+       try:
+           ordered_list = [(19*a+0),(19*a+1),(19*a+2),(19*a+3),(19*a+4),(19*a+5),(19*a+6),(19*a+10),(19*a+11),(19*a+14),(19*a+13),(19*a+12),(19*a+17),(19*a+18),(19*a+19),(19*a+20),(19*a+15),(19*a+16)    ,(19*a+9),(19*a+7),(19*a+8)]
+           C_list[(19*a+0):(19*a+19)] = [C_list[i] for i in ordered_list]
+       except:
+           pass
+       a+=1
+   print(C_list)
+   return [C_list, C_Residues]
+
+def DT_fixer(pdb):
+   T_Residues = sorter(pdb)[3]
+   T_list = []
+   index = 0
+   a=0
+   for i in T_Residues:
+       x = 0
+       try:
+           while x <20:
+               T_list.append(T_Residues[index])
+               index+=1
+               x+=1
+       except:
+           pass
+#order according to set pattern
+     try:
+           ordered_list = [(20*a+0),(20*a+1),(20*a+2),(20*a+3),(20*a+4),(20*a+5),(20*a+6),(20*a+10),(20*a+11),(20*a+14),(20*a+13),(20*a+12),(20*a+17),(20*a+18),(20*a+19),(20*a+20),(20*a+15),(20*a+16)    ,(20*a+9),(20*a+7),(20*a+8)]
+           T_list[(20*a+0):(20*a+20)] = [T_list[i] for i in ordered_list]
+       except:
+           pass
+       a+=1
+   print(T_list)
+   return [T_list, T_Residues]
+
+def DG_formatter(pdb):
+   G_List = DG_fixer(pdb)[0]
+   G_residue_list=['P  ','O1P','O2P',"O5'","C5'","C4'","O4'","C1'","N9 ","C4 ","N2 ","N3 ","C2 ","N1 ","C6 ","06 ","C5 ","N7 ","C8 ","C2'","C3'","O3'"]
+   index=0
+   x=0
+   try:
+       for i in G_List:
+           G_List[index]= G_List[index][:13] + G_residue_list[x] + G_List[index][16:]
+           index+=1
+           x+=1
+           if x == 21:
+       x= 0
+   except:
+       pass
+   return [G_List]
+
+def DA_formatter(pdb):
+   A_List = DA_fixer(pdb)[0]
+   A_residue_list=['P  ','O1P','O2P',"O5'","C5'","C4'","O4'","C1'","N9 ","C5 ","N7 ","C8 ","N1 ","C2 ","N3 ","C4 ","C6 ","N6 ","C2'","C3'","O3'"]
+   x=0
+   index=0
+   try:
+       for i in A_List:
+           A_List[index] = A_List[index][:13] +  A_residue_list[x] + A_List[index][16:]
+           index+=1
+           x+=1
+           if x == 20:
+               x = 0
+
+   except:
+       pass
+   return [A_List]
+
+
+def DC_formatter(pdb):
+   C_List = DC_fixer(pdb)[0]
+   C_residue_list=['P  ','O1P','O2P',"O5'","C5'","C4'","O4'","C1'","N1 ","C6 ","C5 ","C2 ","O2 ","N3 ","C4 ","N4 ","C2'","C3'","O3'"]
+
+   index=0
+   x=0
+   try:
+       for i in C_List:
+           C_List[index] = C_List[index][:13] + C_residue_list[x] + C_List[index][16:]
+           index+=1
+           x+=1
+           if x == 18:
+               x = 0
+   except:
+       pass
+   return [C_List]
+ 
+def DT_formatter(pdb):
+   T_List = DT_fixer(pdb)[0]
+   T_residue_list=['P  ','O1P','O2P',"O5'","C5'","C4'","O4'","C1'","N1 ","C6 ","C2 ","O2 ","N3 ","C4 ","O4 ","C5 ","C5M","C2'","C3'","O3'"]
+
+   index=0
+   x=0
+   try:
+       for i in T_List:
+           T_List[index] = T_List[index][:13] + T_residue_list[x] + T_List[index][16:]
+           index+=1
+           x+=1
+           if x == 19:
+               x = 0
+   except:
+         pass
+     return [T_List]
+ 
+ 
+def writer(pdb1, pdb):
+   #import G|A|C|T_List
+   f= open(pdb1,'w')
+   pdb_read=open(pdb)
+   lines = pdb_read.readlines()
+   A_List = DA_formatter(pdb)[0]
+   C_List = DC_formatter(pdb)[0]
+   G_List = DG_formatter(pdb)[0]
+   T_List = DT_formatter(pdb)[0]
+
+   a=0
+   c=0
+   g=0
+   t=0
+   index=0
+   for i in lines:
+       try:
+           if lines[index][18]=='A':
+               f.write(A_List[a])
+               a+=1
+           if lines[index][18]=='C':
+               f.write(C_List[c])
+               c+=1
+           if lines[index][18]=='G':
+               f.write(G_List[g])
+               g+=1
+           if lines[index][18]=='T':
+               f.write(T_List[t])
+               t+=1
+           index+=1
+       except:
+           pass
+   f.closed
+
