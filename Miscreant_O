@@ -1,10 +1,11 @@
 def sorter(pdb):
-# Residue Sorting- splits into 4 lists: DA, DC, DG, DT
   pdb_read=open(pdb)
   lines = pdb_read.readlines()
 
   Miscreant_O=[]
   
+#sort Miscreant O's into list. (working properly)
+
   index = 0
   for i in lines:
     try:
@@ -13,7 +14,10 @@ def sorter(pdb):
       index+=1
     except:
       pass
- 
+      
+ # distribute O's into residues that are missing an oxygen. 
+ # (if i[18] == 'G' is working fine, but the other if statements are not working)
+
   z=22
   x=0
   index=0
