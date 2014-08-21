@@ -1,0 +1,35 @@
+def sorter(pdb):
+# Residue Sorting- splits into 4 lists: DA, DC, DG, DT
+  pdb_read=open(pdb)
+  lines = pdb_read.readlines()
+
+  Miscreant_O=[]
+  
+  index = 0
+  for i in lines:
+    try:
+      if lines[index][17]=='L' and lines[index][13]=='O':
+        Miscreant_O.append(lines[index])
+      index+=1
+    except:
+      pass
+ 
+  z=22
+  x=0
+  index=0
+  for i in lines:
+    try:
+      if i[18] == 'G':
+        z-=1
+      if lines[index][25] != lines[index+1][25]:
+        if z > 0:
+        lines.insert[index, Miscrean_O[x]]
+        x+=1
+        print(x)
+      if lines[index][25] != lines[index+1][25]:
+        z=22
+        print(z)
+      index+=1
+      print(z)
+    except:
+      pass
